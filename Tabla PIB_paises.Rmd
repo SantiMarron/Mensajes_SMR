@@ -1,0 +1,52 @@
+# Tablas comparativas {-}
+
+***
+
+A continuación las tablas comparativas a incluir en distintos chunks:
+
+<center>
+
+**Derrama económica de la IMCC vs. PIB de países seleccionados**
+
+<br>
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+
+library(readxl)
+library(tidyverse)
+library(DT)
+
+PIB_paises <- read_excel("Tablas_comparaciones.xlsx", sheet = 'PIB_PAISES') 
+
+PIB_paises %>%
+  datatable(
+    rownames = FALSE,
+    #filter = "top",
+    width = 700,
+    options = list(#pageLength = 5,
+      #scrollX = T,
+      #searching = TRUE,
+      #lengthMenu = c(5,10,25),
+    columnDefs = list(
+        list(className = 'dt-center',
+             targets = 0:2)
+      ))
+  ) %>%
+  formatCurrency(
+    c(2),
+    currency = '$',
+    interval = 3,
+    mark = ',',
+    digits = 2
+  ) %>% 
+  formatPercentage(c(3), digits = 0)
+
+
+
+```
+
+</center>
+
+
+
+
