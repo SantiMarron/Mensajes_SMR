@@ -6,7 +6,7 @@ A continuación las tablas comparativas a incluir en distintos chunks:
 
 <center>
 
-**Derrama económica de la IMCC vs. PIB de entidades seleccionadas**
+**Empleos totales de la IMCC vs. población total en entidades seleccionadas **
 
 <br>
 
@@ -16,14 +16,14 @@ library(readxl)
 library(tidyverse)
 library(DT)
 
-Deuda <- read_excel("Tablas_comparaciones.xlsx", sheet = 'PIB_ESTADOS') 
+Pob_edos <- read_excel("Tablas_comparaciones.xlsx", sheet = 'POB_ESTADOS') 
 
-Deuda %>%
+Pob_edos %>%
   datatable(
     rownames = FALSE,
     #filter = "top",
     width = 700,
-    options = list(#pageLength = 5,
+    options = list(pageLength = 11,
       #scrollX = T,
       #searching = TRUE,
       #lengthMenu = c(5,10,25),
@@ -31,16 +31,14 @@ Deuda %>%
         list(className = 'dt-center',
              targets = 0:1)
       ))
-  ) %>%
-  formatCurrency(
+  ) %>% 
+   formatRound(
     c(2),
-    currency = '$',
     interval = 3,
     mark = ',',
-    digits = 2
-  ) %>% 
-  formatPercentage(c(3), 
-                   digits = 1)
+    digits = 0
+  ) 
+
 
 ```
 
